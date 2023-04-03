@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Author Collaboration Recommender</title>
+</head>
+<body>
+  <h1>Author Collaboration Recommender</h1>
+  <h2>Find Similarity Percentage</h2>
+  <form action="/similarity" method="post">
+    Author 1: <input type="text" name="author1" required><br>
+    Author 2: <input type="text" name="author2" required><br>
+    <input type="submit" value="Get Similarity Percentage">
+  </form>
+  <h2>Recommend Collaborators</h2>
+  <form action="/recommend" method="post">
+    Author: <input type="text" name="author" required><br>
+    <input type="submit" value="Recommend Collaborators">
+  </form>
+</body>
+</html>
