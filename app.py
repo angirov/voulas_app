@@ -1,9 +1,16 @@
 import pandas as pd
 
-dataframe_path = './similarity_matrix.csv'
-similarity_df = pd.read_csv(dataframe_path, index_col=0)
+similarity_path = './similarity.csv'
+similarity_df = pd.read_csv(similarity_path, index_col=0)
+
+topics_path = './topics.csv'
+topics_df = pd.read_csv(topics_path, index_col=0)
 
 def get_similarity_percentage(author1, author2, similarity_df):
+    similarity = similarity_df.loc[author1, author2] * 100
+    return round(similarity, 2)
+
+def get_topics(author, topics_df):
     similarity = similarity_df.loc[author1, author2] * 100
     return round(similarity, 2)
 
@@ -12,6 +19,10 @@ def recommend_collaborators(author, similarity_df, num_recommendations=5):
     top_recommendations = sorted_similarities.head(num_recommendations + 1).index.tolist()
     top_recommendations.remove(author)  # remove the input author from the recommendations
     return top_recommendations
+
+def get_topics(author, topics_df):
+    topics = topics_df.loc[author].tolist()
+    return topics
 
 from flask import Flask, render_template, request
 
@@ -32,8 +43,13 @@ def similarity():
 def recommend():
     author = request.form['author']
     recommendations = recommend_collaborators(author, similarity_df)
+    topics = get_topics(author, topics_df)
     recommendations_str = ', '.join(recommendations)
-    return f"Top {len(recommendations)} recommended collaborators for {author} are: {recommendations_str}"
+    topics_str = ', '.join(topics)
+    return render_template("recommend.html",
+                           recommendations_str=recommendations_str,
+                           topics_str=topics_str,
+                           author=author)
 
 if __name__ == '__main__':
     app.run()
