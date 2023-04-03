@@ -1,6 +1,6 @@
 # voulas_app
 
-## Deploying at Heroku (consts around 1 cent / hour)
+## Deploying at Heroku (costs around 1 cent / hour)
 
 For redeploying this app in Heroku, you have to add the secret to the repository:
 
