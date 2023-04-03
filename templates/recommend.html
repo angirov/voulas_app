@@ -1,4 +1,14 @@
-Top recommended collaborators for {{author}} are: {{recommendations_str}}.
+Top recommended collaborators for {{author}} are:
+<ul>
+    {% for recommendation in recommendations %}
+        <li>{{ recommendation }}</li>
+    {% endfor %}
+    </ul>
 <br>
 <br>
-{{author}}'s top topics are: {{topics_str}}
+{{author}}'s top topics are:
+<ul>
+{% for topic in topics %}
+    <li>{{ topic }}</li>
+{% endfor %}
+</ul>

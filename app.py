@@ -44,11 +44,9 @@ def recommend():
     author = request.form['author']
     recommendations = recommend_collaborators(author, similarity_df)
     topics = get_topics(author, topics_df)
-    recommendations_str = ', '.join(recommendations)
-    topics_str = ', '.join(topics)
     return render_template("recommend.html",
-                           recommendations_str=recommendations_str,
-                           topics_str=topics_str,
+                           recommendations=recommendations,
+                           topics=topics,
                            author=author)
 
 if __name__ == '__main__':
